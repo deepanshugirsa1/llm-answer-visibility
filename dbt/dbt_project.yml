@@ -1,0 +1,13 @@
+name: llm_answer_visibility
+version: "0.1.0"
+config-version: 2
+profile: lav
+model-paths: ["models"]
+models:
+  llm_answer_visibility:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table

@@ -1,0 +1,35 @@
+version: 2
+
+sources:
+  - name: lav
+    database: lav
+    tables:
+      - name: raw_answers
+        loaded_at_field: collected_at
+        freshness:
+          warn_after: {count: 26, period: hour}
+          error_after: {count: 48, period: hour}
+      - name: answer_citations
+      - name: brand_mentions
+
+models:
+  - name: stg_answers
+    columns:
+      - name: answer_key
+        tests: [not_null, unique]
+      - name: status
+        tests:
+          - accepted_values: {values: ['ok', 'error', 'timeout']}
+  - name: stg_brand_mentions
+    columns:
+      - name: brand
+        tests: [not_null]
+      - name: rank
+        tests: [not_null]
+  - name: mart_share_of_voice
+    columns:
+      - name: mention_rate
+        tests:
+          - dbt_utils.accepted_range: {min_value: 0, max_value: 1}
+      - name: brand
+        tests: [not_null]

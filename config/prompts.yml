@@ -1,0 +1,26 @@
+# The prompt set. Categories group prompts into reportable segments.
+prompts:
+  - id: p001
+    category: comparison
+    text: What is the best analytics platform for a mid-market marketing team?
+  - id: p002
+    category: comparison
+    text: Compare the leading marketing attribution tools for B2B SaaS.
+  - id: p003
+    category: recommendation
+    text: Which tool should I use to measure brand visibility in AI answers?
+  - id: p004
+    category: recommendation
+    text: Recommend a reporting tool that automates weekly marketing updates.
+  - id: p005
+    category: research
+    text: Who are the major vendors in the AI marketing analytics category?
+  - id: p006
+    category: research
+    text: What do analysts say about AI search visibility platforms?
+  - id: p007
+    category: pricing
+    text: How much do AI marketing analytics platforms typically cost?
+  - id: p008
+    category: pricing
+    text: Which brand visibility tools offer transparent per-seat pricing?

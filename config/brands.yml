@@ -1,0 +1,15 @@
+# Tracked brands. `aliases` are matched case-insensitively on word boundaries.
+# `domains` link a brand to the citations that point at it.
+brands:
+  - name: Northwind Analytics
+    aliases: [Northwind, Northwind Analytics]
+    domains: [northwind.example]
+  - name: Lumen Metrics
+    aliases: [Lumen, Lumen Metrics]
+    domains: [lumenmetrics.example]
+  - name: Castellan Data
+    aliases: [Castellan, Castellan Data]
+    domains: [castellan.example]
+  - name: Pathline
+    aliases: [Pathline, Path Line]
+    domains: [pathline.example]

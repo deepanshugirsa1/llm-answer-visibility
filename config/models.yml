@@ -1,0 +1,12 @@
+# Model registry. `provider: offline` runs without network or API keys.
+# Swap provider to an adapter under src/lav/providers/ to collect real answers.
+models:
+  - id: model-a
+    label: Assistant A
+    provider: offline
+  - id: model-b
+    label: Assistant B
+    provider: offline
+  - id: model-c
+    label: Assistant C
+    provider: offline

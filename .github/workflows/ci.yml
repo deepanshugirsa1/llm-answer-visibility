@@ -1,0 +1,45 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 7 * * *"   # daily collection run
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Unit tests
+        run: python -m pytest -q
+        env:
+          PYTHONPATH: src
+
+  pipeline:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Collect, publish marts, gate on quality
+        # `check` exits 2 on a P0 (missing coverage, stale or empty run) and
+        # 1 on a P1 (parse yield below floor, unexplained visibility drift),
+        # so a silent data problem fails the build instead of reaching a report.
+        run: |
+          python -m lav.cli run
+          python -m lav.cli report --out data/report.json
+          python -m lav.cli check --baseline data/baseline.json
+        env:
+          PYTHONPATH: src
+      - uses: actions/upload-artifact@v4
+        with:
+          name: visibility-report
+          path: data/report.json
